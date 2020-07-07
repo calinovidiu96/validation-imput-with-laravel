@@ -51,7 +51,7 @@ class UserController extends Controller
             'promotional_code' => 'required|unique:users,promotional_code|exists:promotional_codes,promotional_code|min:8|max:8',
             'GDPR'=> 'required',
             'terms'=> 'required',
-            'created_at'=>'date|'
+
 
         ],[
             'name.required'=>'You need to insert your name.',
