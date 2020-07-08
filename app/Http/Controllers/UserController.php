@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\User;
+use App\Http\Requests\UserStoreRequest;
 
 class UserController extends Controller
 {
@@ -34,36 +36,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
-        $input = $request->all();
 
-        // VALIDARI
-        // $validatedData = $request->validate([
-        //     'promotional_code' => 'required|max:8|exists:laravel_voxline.promotional_codes',
-            
-        // ]);
-
-        $this->validate($request,[
-            'name'=> 'required',
-            'mobile_number'=>'required',
-            'promotional_code' => 'required|unique:users,promotional_code|exists:promotional_codes,promotional_code|min:8|max:8',
-            'GDPR'=> 'required',
-            'terms'=> 'required',
-
-
-        ],[
-            'name.required'=>'You need to insert your name.',
-            'mobile_number.required'=>'You need to insert your mobile number.',
-            'promotional_code.required'=>'You need to insert your promotional code.',
-            'GDPR.required'=>'You need to accept General Data Protection Regulation.',
-            'terms.required'=>'You need to accept our terms and conditions.',
-            'promotional_code.unique'=>'This promotional code is already registered.',
-            'promotional_code.exists'=>'This promotional code it\'s not valid. Please try insert a correct one.',
-        ]);
-
-    
+        $input = $request->validated();
 
         User::create($input);
 

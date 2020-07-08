@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('mobile_number')->unique()->unsigned();
+            $table->bigInteger('mobile_number')->unsigned();
             $table->string('promotional_code')->unique();
             $table->boolean('GDPR')->default(0);
             $table->boolean('terms')->default(0);
